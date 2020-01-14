@@ -9,7 +9,7 @@ for(item of basket){
     console.log(item);
 }
 
-//for in loop
+//for in loop 
 for(item in detailedBasket){
     console.log(item); //for in is used in objects, it enumarates
 }
