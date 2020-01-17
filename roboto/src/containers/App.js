@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
@@ -23,7 +23,7 @@ class App extends Component {
   onSearchChange = (event) => {
     this.setState({searchfield: event.target.value})
   }
- 
+
   render(){
     const {robot, searchfield} = this.state;
     const filteredRobots = robot.filter(robot => {
