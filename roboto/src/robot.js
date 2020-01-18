@@ -1,4 +1,7 @@
-export const robot = [ //This is not a default can export multiple items
+//An export default can only export one element
+//This file is using export, this file can have multiple exports. To return something it has to be 
+//exported with destructuring 
+export const robot = [ 
   {
     id: 1,
     name: 'Leanne Graham',

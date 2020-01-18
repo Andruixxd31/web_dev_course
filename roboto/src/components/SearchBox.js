@@ -7,7 +7,7 @@ const SearchBox = ({Searchfield, searchChange}) => {
       className = "pa3 ba b--green bg-lightest-blue"
       type="search" 
       placeholder="search robots"
-      onChange={searchChange} 
+      onChange={searchChange} //getting what is being type
       />
     </div>
   );
