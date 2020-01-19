@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
+import ErrorBoundry from '../components/ErrorBoundry';
 import './App.css';
 
 
@@ -45,7 +46,9 @@ class App extends Component { //every component that has state uses the class sy
         <h1 className = "f1">Robotos</h1>
         <SearchBox searchChange={this.onSearchChange} />  
         <Scroll>
-          <CardList robot={filteredRobots}/> 
+          <ErrorBoundry> {/* If anything in the Cardlist fails is gonna catch it and display it*/}
+            <CardList robot={filteredRobots}/> 
+            </ErrorBoundry>
         </Scroll> {/*In this case Cardlist will be a children of scroll. USing props.children we will have an object of type cardlist */}
         </div>
       ); //the robots from the filteredRobots are rendered
