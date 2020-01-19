@@ -4,9 +4,8 @@ urls = [
   'https://jsonplaceholder.typicode.com/albums'
 ]
 
-
 Promise.all(urls.map(url => {
-  return fetch(url).then(resp => resp.json())
+  return fetch(url).then(resp => resp.json()) //fetch each url through the response
 })).then(results => {
   console.log(results[0])
   console.log(results[1])
