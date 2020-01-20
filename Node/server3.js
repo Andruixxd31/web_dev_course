@@ -1,14 +1,15 @@
-const express = require('express'); //Creating an express server
-const app = express(); //app to run express
+const express = require('express'); 
+const app = express(); 
 
-//Get request at the root
+//the URL-encoded data will be parsed with the qs library. It allows for nested objects
+app.use(express.urlencoded({extended: true})); 
+
+app.use(express.json()); //express will know of json
 app.get('/', (req, res) => { 
     res.send('Getting the root');
 });
 
-//Get request at the /proflie
 app.get('/profile', (req, res) => { 
-    //can aslo send html and or js variables
     const user = {
         name: 'Sally', 
         hobby: 'Soccer'
@@ -16,9 +17,8 @@ app.get('/profile', (req, res) => {
     res.send(user);
 });
 
-
-//post request at the /profile
 app.post('/profile', (req, res) => { 
+    console.log(req.body); //need a middleware to acces req.body. for this it will be a body parser
     const user2 = {
         name: 'Kevin', 
         hobby: 'Basketball'
