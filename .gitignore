@@ -1,0 +1,6 @@
+#Ignore de .Ds_Store 
+.Ds_Store
+.Ds_Store?
+
+#txt files 
+*.txt
