@@ -1,5 +1,6 @@
 //*--------stting up the server and it's dependecies ---------*/
 const express = require('express');
+const bcrypt = require('bcrypt-nodejs');
 
 
 const app = express();
@@ -25,6 +26,13 @@ const database = {
             entries: 0,
             joined: new Date()
         }
+    ], 
+    logging: [
+        {
+            id: '987',
+            hash: '',
+            email: 'john@example.com'
+        }
     ]
 }
 
@@ -45,6 +53,9 @@ app.post('/signin', (req, res) => { //*Signin
 
 app.post('/register', (req, res) => { //*Register
     const {name, email, password} = req.body;
+    bcrypt.hash(password, null, null, function(err, hash) {
+        console.log(hash);
+    });
     database.users.push({
         id: '125', 
         name: name,
@@ -56,16 +67,47 @@ app.post('/register', (req, res) => { //*Register
     res.json(database.users[database.users.length-1]);
 })
 
+app.get('/profile/:id', (req, res) => {
+    const {id} = req.params;
+    let found = false;
+    database.users.forEach(user => {
+        if (user.id === id) {
+            found = true;
+            return res.json(user);
+        } 
+    })
+    if(!found){
+        res.status(404).json('user not found');
+    }
+})
+
+app.put('/image', (req, res) => { //*Root
+    const {id} = req.body;
+    let found = false;
+    database.users.forEach(user => {
+        if (user.id === id) {
+            found = true;
+            user.entries++;
+            return res.json(user.entries);
+        } 
+    })
+    if(!found){
+        res.status(404).json('user not found');
+    }
+})
+
+
+
+// // Load hash from your password DB.
+// bcrypt.compare("bacon", hash, function(err, res) {
+//     // res == true
+// });
+// bcrypt.compare("veggies", hash, function(err, res) {
+//     // res = false
+// });
+
 //*-------- Port listening and its actions ---------*/
 app.listen(3000, () => {
     console.log('App is running');
 });
 
-/* 
-Main idea of the eskeleton of the server
-/signin -> POST res: success/fail
-/register -> POST res: user
-/profile/:uderid -> GET res: return user
-/image --> PUT -> res: count of user
-
-*/
