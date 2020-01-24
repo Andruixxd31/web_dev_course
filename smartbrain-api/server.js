@@ -1,11 +1,13 @@
 //*--------stting up the server and it's dependecies ---------*/
 const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
+const cors = require('cors');
 
 
 const app = express();
 
 app.use(express.json()); //parsing the responsonse to use req.body
+app.use(cors()) //middleware for cors
 
 //*-------- variables used ---------*/
 const database = {
@@ -45,7 +47,7 @@ app.get('/', (req, res) => { //*Root
 app.post('/signin', (req, res) => { //*Signin
     if (req.body.email === database.users[0].email 
         && req.body.password === database.users[0].password) {
-        res.json("sucess")//express comes with a built in json response
+        res.json("success")//express comes with a built in json response
     } else {
         res.status(400).json("error login in");
     }
@@ -60,7 +62,6 @@ app.post('/register', (req, res) => { //*Register
         id: '125', 
         name: name,
         email: email,
-        password: password,
         entries: 0,
         joined: new Date()
     });
