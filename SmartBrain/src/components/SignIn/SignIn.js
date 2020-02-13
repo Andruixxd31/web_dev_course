@@ -1,36 +1,39 @@
 import React from 'react';
 
 class SignIn extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            singInEmal: '',
-            singInPassword: ''
-        }
+    constructor(props) {
+    super(props);
+    this.state = {
+        signInEmail: '',
+        signInPassword: ''
     }
-    
+    } 
+
     onEmailChange = (event) => {
-        this.setState({singInEmal: event.target.value})
-    }
-    onPasswordChange = (event) => {
-        this.setState({singInPassword: event.target.value})
+        this.setState({signInEmail: event.target.value})
     }
 
-    onSubmitSignIn = (event) => {
+    onPasswordChange = (event) => {
+        this.setState({signInPassword: event.target.value})
+    }
+
+    onSubmitSignIn = () => {
         fetch('http://localhost:3000/signin', {
-            method: 'post', //by default fetch is a get request
-            headers: {'Content-Type': 'application/json'}, 
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: this.state.singInEmal,
-                password: this.state.singInPassword
+                email: this.state.signInEmail,
+                password: this.state.signInPassword
             })
         })
         .then(response => response.json())
-        .then(data => {
-            if (data === 'success') this.props.onRouteChange('home');
+        .then(user => {
+            if (user === "success") {
+            // this.props.loadUser(user)
+            this.props.onRouteChange('home');
+            }   
         })
-    }
-
+}
 
     render() {
         const { onRouteChange } = this.props;
@@ -60,7 +63,8 @@ class SignIn extends React.Component {
                     <div className="">
                         <input 
                         onClick={this.onSubmitSignIn} //pasing as a function so it does not render automatically
-                        className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in"
+                        className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
+                        type="submit" value="Sign in"
                         />
                     </div>
                     <div className="lh-copy mt3">
