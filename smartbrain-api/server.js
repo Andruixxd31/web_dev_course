@@ -1,13 +1,29 @@
+//With knex.js a postgres sql database was linked with the server
+
 //*--------stting up the server and it's dependecies ---------*/
 const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
-
+const knex = require('knex')
 
 const app = express();
 
 app.use(express.json()); //parsing the responsonse to use req.body
 app.use(cors()) //middleware for cors
+
+const db = knex({
+    client: 'pg',
+    connection: {
+        host : '127.0.0.1', //is localhost
+        user : '',
+        password : 'XD',
+        database : 'smart-brain' //connecting the database by putting its name
+    }
+});
+
+// db.select('*').from('users').then(data => { //example of simple query with knex
+//     console.log(data);
+// });
 
 //*-------- variables used ---------*/
 const database = {
@@ -55,16 +71,14 @@ app.post('/signin', (req, res) => { //*Signins
 
 app.post('/register', (req, res) => { //*Register
     const {name, email, password} = req.body;
-    bcrypt.hash(password, null, null, function(err, hash) {
-        console.log(hash);
-    });
-    database.users.push({
-        id: '125', 
-        name: name,
+    // bcrypt.hash(password, null, null, function(err, hash) {
+    //     console.log(hash);
+    // });
+    db('users').insert({
         email: email,
-        entries: 0,
-        joined: new Date()
-    });
+        name: name,
+        join: new Date() 
+    }).then(console.log)
     res.json(database.users[database.users.length-1]);
 })
 
