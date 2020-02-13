@@ -15,8 +15,8 @@ const database = {
         {
             id: '123', 
             name: 'John',
-            email: 'john@example.com',
-            password: 'cookies',
+            email: 'J',
+            password: 'C',
             entries: 0,
             joined: new Date()
         },
@@ -44,10 +44,10 @@ app.get('/', (req, res) => { //*Root
     res.send(database.users);
 })
 
-app.post('/signin', (req, res) => { //*Signin
+app.post('/signin', (req, res) => { //*Signins
     if (req.body.email === database.users[0].email 
         && req.body.password === database.users[0].password) {
-        res.json("success")//express comes with a built in json response
+        res.json(database.users[0]);//express comes with a built in json response
     } else {
         res.status(400).json("error login in");
     }
