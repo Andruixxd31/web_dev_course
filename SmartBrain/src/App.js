@@ -26,11 +26,8 @@ const particlesOption = {
   }
 }
 
-class App extends Component { //changed to function to a class to use de constructor
-  constructor(){
-    super();
-    this.state = {
-      input: '',
+const initialState = {
+  input: '',
       imageURL: '', 
       box: {}, 
       route: 'signin', 
@@ -42,7 +39,12 @@ class App extends Component { //changed to function to a class to use de constru
         entries: 0,
         joined: ''
       }
-    }
+}
+
+class App extends Component { //changed to function to a class to use de constructor
+  constructor(){
+    super();
+    this.state = initialState;
   }
 
   onInputChange = (event) => {
@@ -68,7 +70,6 @@ class App extends Component { //changed to function to a class to use de constru
             .then(count => {
               this.setState(Object.assign(this.state.user, { entries: count}))
             })
-
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -95,7 +96,7 @@ class App extends Component { //changed to function to a class to use de constru
 
   onRouteChange = (route) =>{
     if (route === 'signout'){
-      this.setState({isSignedIn: false})
+      this.setState(initialState);
     }else if(route === 'home') {
       this.setState({isSignedIn: true});
     }

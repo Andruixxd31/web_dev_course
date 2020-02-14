@@ -4,7 +4,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
-const knex = require('knex')
+const knex = require('knex');
+
+//controllers
+const register = require('./controllers/register'); 
+const signin = require('./controllers/signin'); 
 
 const app = express();
 
@@ -34,57 +38,12 @@ app.get('/', (req, res) => { //*Root
     res.send(database.users);
 })
 
-app.post('/signin', (req, res) => { //*Signins
-    const {email, password} = req.body;
-    db.select('email', 'hash').from('login')
-        .where('email', '=', req.body.email)
-        .then(data => {
-            const isValid = bcrypt.compareSync(password, data[0].hash);
-            if (isValid) {
-                return db.select('*').from('users')
-                    .where('email', '=', email)
-                    .then(user => {
-                        res.json(user[0]);
-                    })
-                    .catch(err => res.status(400).json('unable to get user'));
-            } else {
-                res.status(400).json('wrong credentials')
-            }
-        })
-        .catch(err => res.status(400).json('wrong credentials'));
-})
+//the req res receive the req, res, database and bcrypt 
+//This is called dependecy injection
+app.post('/sigin', (req, res) => {signin.handleSignIn(req, res, db, bcrypt)})
+app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)})
 
-app.post('/register', (req, res) => { //*Register
-    const {name, email, password} = req.body;
-    const hash = bcrypt.hashSync(password);
 
-    bcrypt.compareSync("veggies", hash); // false
-
-    //use to update info in login and users always together if one fails nothing is updated
-    db.transaction(trx =>{
-        trx.insert({ 
-            hash: hash,
-            email: email,
-        })
-        .into('login') //update login
-        .returning('email')
-        .then(loginEmail => { //use the login email to retunr another trx transaction
-            return trx('users')
-            .returning('*')
-            .insert({
-                email: loginEmail[0],
-                name: name,
-                joined: new Date() 
-            })
-            .then(response => {
-                res.json(response);
-            })
-        })
-    .then(trx.commit) //commits if everything works
-    .catch(trx.rollback) //doesn't do the transaction if anything fails.
-    }) 
-    .catch(err => res.status(400).json('unable to register'))
-})
 
 app.get('/profile/:id', (req, res) => {
     const {id} = req.params;
