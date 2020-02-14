@@ -16,7 +16,7 @@ const db = knex({
     connection: {
         host : '127.0.0.1', //is localhost
         user : '',
-        password : 'XD',
+        password : '',
         database : 'smart-brain' //connecting the database by putting its name
     }
 });
@@ -74,26 +74,31 @@ app.post('/register', (req, res) => { //*Register
     // bcrypt.hash(password, null, null, function(err, hash) {
     //     console.log(hash);
     // });
-    db('users').insert({
-        email: email,
-        name: name,
-        join: new Date() 
-    }).then(console.log)
-    res.json(database.users[database.users.length-1]);
+    db('users')
+        .returning('*')
+        .insert({
+            email: email,
+            name: name,
+            joined: new Date() 
+        })
+        .then(response => {
+            res.json(response);
+        })
+        .catch(err => res.status(400).json('unable to register'))
 })
 
 app.get('/profile/:id', (req, res) => {
     const {id} = req.params;
-    let found = false;
-    database.users.forEach(user => {
-        if (user.id === id) {
-            found = true;
-            return res.json(user);
-        } 
+    db.select('*').from('users').where({id})
+    .then( user => {
+        if(user.length){
+            res.status(200).json(user[0]);
+        }else{
+            throw new ERROR('Could not find user')
+        }
     })
-    if(!found){
-        res.status(404).json('user not found');
-    }
+    .catch(err =>
+        res.status(400).json(err.message))
 })
 
 app.put('/image', (req, res) => { //*Root
