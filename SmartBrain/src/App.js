@@ -28,17 +28,17 @@ const particlesOption = {
 
 const initialState = {
   input: '',
-      imageURL: '', 
-      box: {}, 
-      route: 'signin', 
-      isSignedIn: false, 
-      user: {
-        id: '', 
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
+  imageURL: '', 
+  box: {}, 
+  route: 'signin', 
+  isSignedIn: false, 
+  user: {
+    id: '', 
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
 }
 
 class App extends Component { //changed to function to a class to use de constructor
