@@ -37,6 +37,6 @@ app.put('/image', image.handleImage(db) )
 
 //*-------- Port listening and its actions ---------*/
 app.listen(3000, () => {
-    console.log('App is running');
+    console.log('App is running'); 
 });
 

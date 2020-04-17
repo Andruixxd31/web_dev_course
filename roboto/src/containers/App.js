@@ -58,6 +58,7 @@ class App extends Component { //every component that has state uses the class sy
     const filteredRobots = robots.filter(robot => { //Filtering based on what is typed on searchfield
       return robot.name.toLowerCase().includes(searchField.toLowerCase()); //the search in lower case being compare to the robot name in lowercase
     })
+    
     return isPending ?
       <h1>Loading</h1> :
       (
