@@ -2,11 +2,11 @@ import React from 'react';
 
 class SignIn extends React.Component {
     constructor(props) {
-    super(props);
-    this.state = {
-        signInEmail: '',
-        signInPassword: ''
-    }
+        super(props);
+        this.state = {
+            signInEmail: '',
+            signInPassword: ''
+        }
     } 
 
     onEmailChange = (event) => {

@@ -1,0 +1,49 @@
+body {
+    background: pink;
+}
+
+h1 {
+    color: white;
+}
+
+
+#h3-1 {
+    color: purple; 
+    background: red;
+}
+
+#h3-bajo {
+    color: aquamarine; 
+    background: yellow;
+}
+
+.p1 {
+    color: aliceblue;
+}
+
+#p2 {
+    color: red;
+}
+
+a {
+    color: red;
+}
+
+a:hover {
+    color: aqua;
+    background: palegoldenrod; 
+    text-transform: uppercase;
+}
+
+img:hover {
+    height: 200px;
+    width: 400px;
+}  
+
+
+
+/*
+elemento {
+    caracteristica 
+}
+*/

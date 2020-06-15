@@ -1,0 +1,58 @@
+/*Selector {
+	Property: value;
+}*/
+
+*{
+	text-align: right;
+}
+
+/*Lo que sea modificado 
+después no ira a la derecha */
+
+/*al poner dos elementos  */
+
+body{
+	background-image: url(Sharon.jpg);
+	background-size: cover;
+}
+
+ 
+h2, p{
+	color: red; 
+	text-align: center;
+	border: 5px solid pink; 
+	cursor: pointer;
+	font-size: 150%;
+}
+
+p {
+	text-decoration: underline;
+	text-transform: uppercase;
+	line-height: 30px;
+	font-style: italic;
+	font-weight: bold;
+	font-family: 'Libre Franklin', sans-serif;
+}
+
+img{
+	float: right;
+}
+
+footer{
+	clear: both;
+}
+
+li {
+	list-style: none;
+	display: inline-block;
+}
+
+
+.active{
+	color: red;
+}
+
+
+
+
+

@@ -1,0 +1,23 @@
+.boxmodel {
+	border: 5px solid red; 
+	display: inline-block;
+	padding: 5px 20px 5px 20px; 
+	/*Top, right, bottom left*/
+	margin: 0px 20px;
+	/*0px es top y bottom y 20 es left y right*/
+	width:33px 
+	height: 35px;
+}
+
+p{
+	font-size: 20px
+}
+
+span{
+	font-size: 5em; 
+	/*em dice que es n veces mas grande
+	que el tamaño del font-size 
+	especificado
+	con rem es realtivo con el tamañano
+	prederteminado por html*/
+}

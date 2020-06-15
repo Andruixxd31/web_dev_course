@@ -1,0 +1,38 @@
+body {
+    background-image: url(Arturo.jpg);
+    background-size: cover;
+}
+
+h1 {
+    color: white;
+}
+
+li {
+    color: blue;
+}
+
+a {
+    color: red;
+}
+
+img:hover {
+    height: 280px; 
+	width: 400px;
+	transition: all 1s; 
+}
+
+a:hover {
+    color: green;
+}
+
+#Alan{
+    color: white;
+}
+
+#Arturo {
+    color: purple;
+}
+
+.cl {
+    background: aliceblue;
+}

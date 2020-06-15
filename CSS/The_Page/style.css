@@ -1,0 +1,61 @@
+/*Selector {
+	Property: value;
+}*/
+
+*{
+	text-align: right;
+}
+
+/*Lo que sea modificado 
+después no ira a la derecha */
+
+/*al poner dos elementos  */
+
+body{
+	background-image: url(Sharon.jpg);
+	background-size: cover;
+}
+
+
+h2, p:hover{
+	color: red; 
+	text-align: center;
+	border: 5px solid purple; 
+	cursor: pointer;
+}
+
+p {
+	color: pink; 
+}
+
+/*toma el último punto que ve, al final será verde*/
+ 
+p {
+	color: green; 
+}
+
+li {
+	list-style: none;
+	display: inline-block;
+}
+
+.webtext{
+	border: 5px dashed green;
+}
+
+.active{
+	color: red;
+}
+
+#div1{
+	background: rgba(0,0,225,.2);
+}
+
+#div2{
+	background: rgba(225,0,0
+		,.2);
+}
+
+
+
+
